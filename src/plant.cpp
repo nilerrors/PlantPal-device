@@ -14,6 +14,8 @@ String Plant::credentials() {
                 chip_id() + "\"");
 }
 
+bool Plant::isCreated() { return this->ID() != nullptr; }
+
 bool Plant::create(String id) {
   if (!_prefs.begin("plantpal_plant")) {
     Serial.println("Preferences could not begin");
@@ -26,7 +28,7 @@ bool Plant::create(String id) {
 }
 
 bool Plant::fetch() {
-  if (this->ID() == "") {
+  if (this->ID() == nullptr) {
     Serial.println('Plant not created');
     return false;
   }
@@ -68,12 +70,11 @@ bool Plant::shouldIrrigate(uint8_t moisture_percentage) {
   // if value is 255 then check server
   // else compare with moisture_pecentage_threshold
   if (moisture_percentage == 255) {
-    if (this->ID() == "") {
+    if (this->ID() == nullptr) {
       Serial.println('Plant not created');
       return false;
     }
-    String url =
-        String(SERVER_URL) + "/plants/should_irrigate_now";
+    String url = String(SERVER_URL) + "/plants/should_irrigate_now";
     _http.begin(url.c_str());
 
     int status_code = _http.POST(this->credentials());
@@ -98,7 +99,7 @@ String Plant::ID() {
     Serial.println("Preferences could not begin");
     return "";
   }
-  String id = _prefs.getString("id");
+  String id = _prefs.getString("id", nullptr);
   _prefs.end();
 
   return id;

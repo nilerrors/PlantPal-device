@@ -1,4 +1,5 @@
 #include "server.h"
+#include "consts.h"
 #include "credentials.h"
 #include <Arduino.h>
 #include <HTTPClient.h>
@@ -39,7 +40,7 @@ ConfigServer::ConfigServer() {
       if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
 
-        http.begin("https://10.3.41.39:8000/plants_collection/plants/");
+        http.begin((String(SERVER_URL) + "/plants/").c_str());
 
         String email = server->arg("email");
         String password = server->arg("pass");
@@ -148,7 +149,7 @@ ConfigServer::ConfigServer() {
       if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
 
-        http.begin("https://10.3.41.39:8000/plants_collection/plants/");
+        http.begin((String(SERVER_URL) + "/plants/").c_str());
 
         String email = server->arg("email");
         String password = server->arg("pass");

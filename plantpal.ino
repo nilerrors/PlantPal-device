@@ -108,6 +108,12 @@ void loop() {
     }
   }
 
+  if (!plant.isCreated()) {
+    Serial.println("Plant is not created");
+    delay(500);
+    return;
+  }
+
   // Get plant configuration data
   // every 5 minutes or custom
 
@@ -121,10 +127,12 @@ void loop() {
     if (plant.shouldIrrigate()) {
       // start pomp
       Serial.println("Start pomp");
+      delay(1000);
       digitalWrite(WATER_PUMP_PIN, HIGH);
     } else {
       // start pomp
       Serial.println("Start pomp");
+      delay(1000);
       digitalWrite(WATER_PUMP_PIN, HIGH);
     }
   }
@@ -145,12 +153,14 @@ void loop() {
     Serial.print("Moisture = ");
     Serial.print(moisture_percentage);
     Serial.println("%");
+    delay(1000);
 
     // Check if plant should be irrigated
     // based on the data from irrigation
     if (plant.shouldIrrigate(moisture_percentage)) {
       // start pomp
       Serial.println("Start pomp");
+      delay(1000);
       digitalWrite(WATER_PUMP_PIN, HIGH);
     }
 
@@ -170,15 +180,18 @@ void loop() {
       float flow_milli_litres = (flow_rate / 60) * 1000;
       Serial.print("Flow Milli Litres: ");
       Serial.println(flow_milli_litres);
+      delay(1000);
       flow_meter.total_milli_litres += flow_milli_litres;
 
       Serial.print("Total milli Litres: ");
       Serial.println(flow_meter.total_milli_litres);
+      delay(1000);
 
       if (flow_meter.total_milli_litres >= plant.waterAmount()) {
         flow_meter.total_milli_litres = 0;
         // stop pomp
         Serial.println("Stop pomp");
+        delay(1000);
         digitalWrite(WATER_PUMP_PIN, LOW);
       }
     }
