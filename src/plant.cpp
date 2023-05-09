@@ -14,7 +14,7 @@ String Plant::credentials() {
                 chip_id() + "\"");
 }
 
-bool Plant::isCreated() { return this->ID() != ''; }
+bool Plant::isCreated() { return this->ID() != ""; }
 
 bool Plant::create(String id) {
   if (!_prefs.begin("plantpal_plant")) {
@@ -28,7 +28,7 @@ bool Plant::create(String id) {
 }
 
 bool Plant::fetch() {
-  if (this->ID() == '') {
+  if (this->ID() == "") {
     Serial.println('Plant not created');
     return false;
   }
@@ -70,7 +70,7 @@ bool Plant::shouldIrrigate(uint8_t moisture_percentage) {
   // if value is 255 then check server
   // else compare with moisture_pecentage_threshold
   if (moisture_percentage == 255) {
-    if (this->ID() == '') {
+    if (this->ID() == "") {
       Serial.println('Plant not created');
       return false;
     }
@@ -99,7 +99,7 @@ String Plant::ID() {
     Serial.println("Preferences could not begin");
     return "";
   }
-  String id = _prefs.getString("id", '');
+  String id = _prefs.getString("id", "");
   _prefs.end();
 
   return id;
