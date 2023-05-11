@@ -154,6 +154,10 @@ ConfigServer::ConfigServer() {
         String email = server->arg("email");
         String password = server->arg("pass");
 
+        Serial.print(email);
+        Serial.print(" === ");
+        Serial.println(password);
+
         uint64_t chipid = ESP.getEfuseMac();
         char chipid_str[17];
         sprintf(chipid_str, "%016llX", chipid);

@@ -1,4 +1,4 @@
-#define SERVER_URL "http://10.3.41.39:8000/"
+#define SERVER_URL "http://10.3.41.39:8000"
 
 #define PROTO_SSID "PlantPalConfig"
 #define PROTO_PASSWORD "plantpal"

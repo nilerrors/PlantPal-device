@@ -126,13 +126,13 @@ void loop() {
   if ((millis() - last_time_pump_check) > 30000) {
     if (plant.shouldIrrigate()) {
       // start pomp
-      Serial.println("Start pomp");
-      delay(1000);
+      // Serial.println("Start pomp");
+      // delay(1000);
       digitalWrite(WATER_PUMP_PIN, HIGH);
     } else {
       // start pomp
-      Serial.println("Start pomp");
-      delay(1000);
+      // Serial.println("Start pomp");
+      // delay(1000);
       digitalWrite(WATER_PUMP_PIN, HIGH);
     }
   }
@@ -150,17 +150,17 @@ void loop() {
     if (moisture_percentage < 0)
       moisture_percentage = 0;
 
-    Serial.print("Moisture = ");
-    Serial.print(moisture_percentage);
-    Serial.println("%");
-    delay(1000);
+    // Serial.print("Moisture = ");
+    // Serial.print(moisture_percentage);
+    // Serial.println("%");
+    // delay(1000);
 
     // Check if plant should be irrigated
     // based on the data from irrigation
     if (plant.shouldIrrigate(moisture_percentage)) {
       // start pomp
-      Serial.println("Start pomp");
-      delay(1000);
+      // Serial.println("Start pomp");
+      // delay(1000);
       digitalWrite(WATER_PUMP_PIN, HIGH);
     }
 
@@ -172,26 +172,26 @@ void loop() {
       float flow_rate =
           ((1000.0 / (millis() - flow_meter.last_running)) * pulse_count) /
           CALIBRATION_FACTOR;
-      Serial.print("Flow Rate: ");
-      Serial.println(flow_rate);
+      // Serial.print("Flow Rate: ");
+      // Serial.println(flow_rate);
       flow_meter.last_running = millis();
       flow_meter.running = false;
 
       float flow_milli_litres = (flow_rate / 60) * 1000;
-      Serial.print("Flow Milli Litres: ");
-      Serial.println(flow_milli_litres);
-      delay(1000);
+      // Serial.print("Flow Milli Litres: ");
+      // Serial.println(flow_milli_litres);
+      // delay(1000);
       flow_meter.total_milli_litres += flow_milli_litres;
 
-      Serial.print("Total milli Litres: ");
-      Serial.println(flow_meter.total_milli_litres);
-      delay(1000);
+      // Serial.print("Total milli Litres: ");
+      // Serial.println(flow_meter.total_milli_litres);
+      // delay(1000);
 
       if (flow_meter.total_milli_litres >= plant.waterAmount()) {
         flow_meter.total_milli_litres = 0;
         // stop pomp
-        Serial.println("Stop pomp");
-        delay(1000);
+        // Serial.println("Stop pomp");
+        // delay(1000);
         digitalWrite(WATER_PUMP_PIN, LOW);
       }
     }
